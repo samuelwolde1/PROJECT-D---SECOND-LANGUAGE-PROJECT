@@ -10,7 +10,12 @@ def getText(size):
 background = pygame.image.load("images/Background.png")
 
 def linearSearch():
-    pass
+    while True:
+        screen.fill('#FFFFFF')
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            pygame.display.update()
 def binarySearch():
     pass
 def bubleSort():
@@ -26,14 +31,25 @@ def main_menu():
         menu_text = getText(100).render("Main Menu", True, "#a1dbe6")
         menu_rect = menu_text.get_rect(center = (400, 100))
         ls_text = getText(75).render("LS", True, "#ffffff")
-        ls_rect = menu_text.get_rect(center = (300, 300))
+        ls_rect = ls_text.get_rect(center = (100, 250))
+        bs_text = getText(75).render("BS", True, "#eb4034")
+        bs_rect = bs_text.get_rect(center = (250, 250))
+        bubu_text = getText(75).render("bubu", True, "#26ff00")
+        bubu_rect = bs_text.get_rect(center = (400, 250))
+        screen.blit(bubu_text, bubu_rect)
+        screen.blit(bs_text, bs_rect)
         screen.blit(ls_text, ls_rect)
         screen.blit(menu_text, menu_rect)
         for event in pygame.event.get(): # User did something
             if event.type == pygame.QUIT: # If user clicked close
                 pygame.quit()
-            elif menu_mouse_pos in range(ls_rect.left, ls_rect.right):
-                print('yes')
+            elif ls_rect.collidepoint(menu_mouse_pos):
+                linearSearch()
+            elif bs_rect.collidepoint(menu_mouse_pos):
+                binarySearch()
+            elif bubu_rect.collidepoint(menu_mouse_pos):
+                bubleSort()
+                
         pygame.display.update() 
 main_menu()
     
