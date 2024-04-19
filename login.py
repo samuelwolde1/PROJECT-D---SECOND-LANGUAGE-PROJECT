@@ -16,7 +16,8 @@ def login():
      username = input('Enter username: ')
      password = input('Enter password: ')
      with open('credentials.txt', 'r') as file:
-         stored_username, stored_password = file.read().split(',')
+         for line in file:
+            stored_username, stored_password = line.strip().split(',')
      file.close()
      if username == stored_username and password == stored_password:
          print('Logged in Successfully!')
